@@ -9,7 +9,6 @@ const MyAppointmentsPage = async () => {
   );
 
   const propertyIds = myAppointments.map((p) => p.propertyId);
-  console.log("propertyIds::::", propertyIds);
   const filteredProperties = properties.filter((p) =>
     propertyIds.includes(parseInt(p.id)),
   );

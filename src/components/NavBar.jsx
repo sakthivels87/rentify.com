@@ -70,7 +70,7 @@ const NavBar = () => {
 
           {/* 🔐 Sign In Button */}
           <Link
-            href={"/login"}
+            href={"/signin"}
             className="px-4 py-2 rounded-full bg-cyan-600 text-white text-sm md:text-base
                    hover:bg-cyan-500 transition"
           >
