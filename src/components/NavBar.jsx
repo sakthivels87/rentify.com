@@ -1,35 +1,39 @@
+"use client";
 import Link from "next/link";
+import { FaHouseUser } from "react-icons/fa";
+import { usePathname } from "next/navigation";
 
 const NavBar = () => {
+  const path = usePathname();
+  const links = [
+    { label: "Recent", href: "/properties/recent" },
+    { label: "Top", href: "/properties/top" },
+    { label: "My Appointments", href: "/properties/appointments" },
+  ];
   return (
     <nav className="w-full 2xl:max-w-7xl mx-auto px-3 lg:px-6 py-2 md:py-4 font-semibold">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-6">
+      <div className="flex basis-1 items-center justify-between">
+        <div className="flex items-center gap-5">
           <Link href="/">
-            <h2 className="text-5xl font-bold text-cyan-700 transition-colors duration-300 hover:text-cyan-500">
+            <h2 className="flex gap-1.5 text-4xl font-bold text-cyan-700 transition-colors duration-300 hover:text-cyan-500">
+              <span>
+                <FaHouseUser />
+              </span>
               Rentify
             </h2>
           </Link>
           <ul className="flex grow gap-8 items-center text-lg mt-2 font-medium">
-            <li>
-              <Link
-                href="/properties/recent"
-                className="relative group text-gray-700 hover:text-cyan-600 transition-colors duration-300"
-              >
-                Recent
-                <span className="absolute left-0 -bottom-1 h-0.5 w-0 bg-cyan-600 transition-all duration-300 group-hover:w-full"></span>
-              </Link>
-            </li>
-
-            <li>
-              <Link
-                href="/properties/top"
-                className="relative group text-gray-700 hover:text-cyan-600 transition-colors duration-300"
-              >
-                Top
-                <span className="absolute left-0 -bottom-1 h-0.5 w-0 bg-cyan-600 transition-all duration-300 group-hover:w-full"></span>
-              </Link>
-            </li>
+            {links.map((item, index) => (
+              <li key={index}>
+                <Link
+                  href={item.href}
+                  className={`relative group ${path === item.href ? "text-gray-900 font-bold" : "text-gray-600"} hover:text-cyan-600 transition-colors duration-300`}
+                >
+                  {item.label}
+                  <span className="absolute left-0 -bottom-1 h-0.5 w-0 bg-cyan-600 transition-all duration-300 group-hover:w-full"></span>
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
         <div className="flex items-center gap-4">
