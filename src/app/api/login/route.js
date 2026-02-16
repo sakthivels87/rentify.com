@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 export async function POST(req) {
   try {
     const { email, password } = await req.json();
@@ -13,7 +14,7 @@ export async function POST(req) {
     }
 
     const users = await fetch(
-      `http://localhost:4500/users?email=${encodeURIComponent(email)}`,
+      `${baseUrl}/api/v1/users?email=${encodeURIComponent(email)}`,
     ).then((r) => r.json());
 
     const user = users[0];
@@ -34,7 +35,7 @@ export async function POST(req) {
       );
     }
 
-    await fetch(`http://localhost:4501/users/${user.id}`, {
+    await fetch(`${baseUrl}/api/v1/users/${user.id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

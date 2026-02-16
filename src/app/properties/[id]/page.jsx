@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import BackButton from "../../../components/BackButton";
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
 const PropertyDetailsPage = () => {
   const { id } = useParams();
@@ -11,7 +12,7 @@ const PropertyDetailsPage = () => {
 
   useEffect(() => {
     async function fetchProperty() {
-      const data = await fetch(`http://localhost:4500/properties/${id}`).then(
+      const data = await fetch(`${baseUrl}/api/v1/properties/${id}`).then(
         (res) => res.json(),
       );
 

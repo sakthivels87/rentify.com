@@ -1,11 +1,19 @@
 import PropertyCard from "../../../components/PropertyCard";
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
 const MyAppointmentsPage = async () => {
-  const myAppointments = await fetch("http://localhost:4500/appointments").then(
+  // const myAppointments = await fetch("http://localhost:4500/appointments").then(
+  //   (res) => res.json(),
+  // );
+  // const properties = await fetch("http://localhost:4500/properties").then(
+  //   (res) => res.json(),
+  // );
+
+  const myAppointments = await fetch(`${baseUrl}/api/v1/appointments`).then(
     (res) => res.json(),
   );
-  const properties = await fetch("http://localhost:4500/properties").then(
-    (res) => res.json(),
+  const properties = await fetch(`${baseUrl}/api/v1/properties`).then((res) =>
+    res.json(),
   );
 
   const propertyIds = myAppointments.map((p) => p.propertyId);

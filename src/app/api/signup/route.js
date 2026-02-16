@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
 export async function POST(req) {
   try {
@@ -13,7 +14,7 @@ export async function POST(req) {
     }
 
     const existingUsers = await fetch(
-      `http://localhost:4500/users?email=${encodeURIComponent(email)}`,
+      `${baseUrl}/api/v1/users?email=${encodeURIComponent(email)}`,
     ).then((r) => r.json());
 
     if (existingUsers.length > 0) {
@@ -35,7 +36,7 @@ export async function POST(req) {
       status: "active",
     };
 
-    const createResponse = await fetch("http://localhost:4500/users", {
+    const createResponse = await fetch(`${baseUrl}/api/v1/users`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newUser),

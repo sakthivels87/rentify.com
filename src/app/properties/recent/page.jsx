@@ -1,11 +1,18 @@
 import PropertyCard from "../../../components/PropertyCard";
-
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 const RecentPropertiesPage = async () => {
-  const properties = await fetch("http://localhost:4500/properties").then(
-    (res) => res.json(),
+  // const properties = await fetch("http://localhost:4500/properties").then(
+  //   (res) => res.json(),
+  // );
+  // const recentProperties = await fetch(
+  //   "http://localhost:4500/recent-properties",
+  // ).then((res) => res.json());
+
+  const properties = await fetch(`${baseUrl}/api/v1/properties`).then((res) =>
+    res.json(),
   );
   const recentProperties = await fetch(
-    "http://localhost:4500/recent-properties",
+    `${baseUrl}/api/v1/recent-properties`,
   ).then((res) => res.json());
 
   const recentPropertyIds = recentProperties.map((r) => r.propertyId);
@@ -14,8 +21,10 @@ const RecentPropertiesPage = async () => {
   );
 
   return (
-    <section className="grid gap-2 m-2">
-      <h2>Recently Added Properties</h2>
+    <section className="grid gap-2 m-2 ml-8">
+      <p className="text-2xl font-bold text-gray-600">
+        Recently Added Properties
+      </p>
       {recentPropertyDetails?.length > 0 &&
         recentPropertyDetails.map((property) => (
           <PropertyCard key={property.id} property={property} />
