@@ -1,20 +1,20 @@
 "use client";
-
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import BackButton from "../../../components/BackButton";
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+export const dynamic = "force-dynamic";
 
 const PropertyDetailsPage = () => {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
   const { id } = useParams();
   const [property, setProperty] = useState(null);
 
   useEffect(() => {
     async function fetchProperty() {
-      const data = await fetch(`${baseUrl}/api/v1/properties/${id}`).then(
-        (res) => res.json(),
-      );
+      const data = await fetch(`${baseUrl}/api/v1/properties/${id}`, {
+        cache: "no-store",
+      }).then((res) => res.json());
 
       setProperty(data);
     }
