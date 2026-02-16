@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 export const dynamic = "force-dynamic";
+import data from "../../../../db.json";
 
 export async function POST(req) {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
@@ -14,10 +15,12 @@ export async function POST(req) {
       );
     }
 
-    const users = await fetch(
-      `${baseUrl}/api/v1/users?email=${encodeURIComponent(email)}`,
-    ).then((r) => r.json());
-
+    // const users = await fetch(
+    //   `${baseUrl}/api/v1/users?email=${encodeURIComponent(email)}`,
+    // ).then((r) => r.json());
+    const users = data.users.filter(
+      (u) => u.email === encodeURIComponent(email),
+    );
     const user = users[0];
 
     if (!user || !user.passwordHash) {

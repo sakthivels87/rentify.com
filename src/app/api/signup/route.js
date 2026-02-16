@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 export const dynamic = "force-dynamic";
-
+import data from "../../../../db.json";
 export async function POST(req) {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
   try {
@@ -14,10 +14,13 @@ export async function POST(req) {
       );
     }
 
-    const existingUsers = await fetch(
-      `${baseUrl}/api/v1/users?email=${encodeURIComponent(email)}`,
-    ).then((r) => r.json());
+    // const existingUsers = await fetch(
+    //   `${baseUrl}/api/v1/users?email=${encodeURIComponent(email)}`,
+    // ).then((r) => r.json());
 
+    const existingUsers = data.users.filter(
+      (user) => user.email === encodeURIComponent(email),
+    );
     if (existingUsers.length > 0) {
       return NextResponse.json(
         { error: "Email already registered" },
@@ -37,11 +40,13 @@ export async function POST(req) {
       status: "active",
     };
 
-    const createResponse = await fetch(`${baseUrl}/api/v1/users`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(newUser),
-    });
+    // const createResponse = await fetch(`${baseUrl}/api/v1/users`, {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify(newUser),
+    // });
+
+    const createResponse = data.users;
 
     if (!createResponse.ok) {
       throw new Error("Failed to create user");

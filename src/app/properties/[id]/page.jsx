@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import BackButton from "../../../components/BackButton";
+import data from "../../../../db.json";
 export const dynamic = "force-dynamic";
 
 const PropertyDetailsPage = () => {
@@ -12,11 +13,11 @@ const PropertyDetailsPage = () => {
 
   useEffect(() => {
     async function fetchProperty() {
-      const data = await fetch(`${baseUrl}/api/v1/properties/${id}`, {
-        cache: "no-store",
-      }).then((res) => res.json());
-
-      setProperty(data);
+      // const data = await fetch(`${baseUrl}/api/v1/properties/${id}`, {
+      //   cache: "no-store",
+      // }).then((res) => res.json());
+      const property = data.properties[id];
+      setProperty(property);
     }
 
     if (id) fetchProperty();

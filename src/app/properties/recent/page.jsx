@@ -1,5 +1,6 @@
 import PropertyCard from "../../../components/PropertyCard";
 export const dynamic = "force-dynamic";
+import data from "../../../../db.json";
 
 const RecentPropertiesPage = async () => {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
@@ -10,13 +11,15 @@ const RecentPropertiesPage = async () => {
   //   "http://localhost:4500/recent-properties",
   // ).then((res) => res.json());
 
-  const properties = await fetch(`${baseUrl}/api/v1/properties`, {
-    cache: "no-store",
-  }).then((res) => res.json());
-  const recentProperties = await fetch(`${baseUrl}/api/v1/recent-properties`, {
-    cache: "no-store",
-  }).then((res) => res.json());
+  // const properties = await fetch(`${baseUrl}/api/v1/properties`, {
+  //   cache: "no-store",
+  // }).then((res) => res.json());
+  // const recentProperties = await fetch(`${baseUrl}/api/v1/recent-properties`, {
+  //   cache: "no-store",
+  // }).then((res) => res.json());
 
+  const properties = data.properties;
+  const recentProperties = data["recent-properties"];
   const recentPropertyIds = recentProperties.map((r) => r.propertyId);
   const recentPropertyDetails = properties.filter((p) =>
     recentPropertyIds.includes(parseInt(p.id)),

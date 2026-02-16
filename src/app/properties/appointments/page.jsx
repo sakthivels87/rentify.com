@@ -1,4 +1,6 @@
 import PropertyCard from "../../../components/PropertyCard";
+
+import data from "../../../../db.json";
 export const dynamic = "force-dynamic";
 const MyAppointmentsPage = async () => {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
@@ -9,13 +11,15 @@ const MyAppointmentsPage = async () => {
   //   (res) => res.json(),
   // );
 
-  const myAppointments = await fetch(`${baseUrl}/api/v1/appointments`, {
-    cache: "no-store",
-  }).then((res) => res.json());
-  const properties = await fetch(`${baseUrl}/api/v1/properties`, {
-    cache: "no-store",
-  }).then((res) => res.json());
+  // const myAppointments = await fetch(`${baseUrl}/api/v1/appointments`, {
+  //   cache: "no-store",
+  // }).then((res) => res.json());
+  // const properties = await fetch(`${baseUrl}/api/v1/properties`, {
+  //   cache: "no-store",
+  // }).then((res) => res.json());
 
+  const myAppointments = data.appointments;
+  const properties = data.properties;
   const propertyIds = myAppointments.map((p) => p.propertyId);
   const filteredProperties = properties.filter((p) =>
     propertyIds.includes(parseInt(p.id)),

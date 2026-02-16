@@ -1,4 +1,5 @@
 import PropertyCard from "../../components/PropertyCard";
+import data from "../../../db.json";
 
 export default async function PropertiesPage() {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
@@ -6,9 +7,11 @@ export default async function PropertiesPage() {
   //   (res) => res.json(),
   // );
 
-  const properties = await fetch(`${baseUrl}/api/v1/properties`).then((res) =>
-    res.json(),
-  );
+  // const properties = await fetch(`${baseUrl}/api/v1/properties`).then((res) =>
+  //   res.json(),
+  // );
+  const properties = data.properties;
+
   return (
     <section className="grid gap-2 m-2 ml-6">
       <p className="text-2xl font-bold text-gray-600">Available Properties</p>
