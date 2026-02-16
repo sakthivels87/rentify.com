@@ -34,14 +34,17 @@ export default function SignInPage() {
   };
 
   return (
-    <div className="max-w-md mx-auto my-16 p-6 bg-white rounded shadow">
+    <div className="max-w-xl mx-auto my-15 p-6 bg-white border border-gray-300 rounded shadow">
       <h1 className="text-2xl font-bold mb-4">Sign In</h1>
       {error && (
         <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
           {error}
         </div>
       )}
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form
+        onSubmit={handleSubmit}
+        className="space-y-4                          "
+      >
         <div>
           <label htmlFor="email" className="block text-sm">
             Email
