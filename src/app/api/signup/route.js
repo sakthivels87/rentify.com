@@ -1,8 +1,9 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+export const dynamic = "force-dynamic";
 
 export async function POST(req) {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
   try {
     const { email, password, name } = await req.json();
 

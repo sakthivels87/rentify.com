@@ -1,7 +1,8 @@
 "use client";
 import { useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useAuth } from "../../context/AuthContext";
+export const dynamic = "force-dynamic";
 
 export default function SignInPage() {
   const [email, setEmail] = useState("");
@@ -9,7 +10,6 @@ export default function SignInPage() {
   const [error, setError] = useState("");
   const { signIn, loading } = useAuth();
   const router = useRouter();
-  const next = useSearchParams().get("next") || "/";
 
   const handleSubmit = async (e) => {
     e.preventDefault();

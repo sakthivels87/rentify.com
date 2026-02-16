@@ -22,7 +22,7 @@ const TopPropertiesPage = async () => {
   const topPropertyDetails = properties.filter((p) =>
     propertyIds.includes(parseInt(p.id)),
   );
-  console.log(topPropertyDetails);
+
   return (
     <section className="grid gap-2 m-2 ml-8">
       <p className="text-2xl font-bold text-gray-600">Top Properties details</p>
