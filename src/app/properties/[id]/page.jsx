@@ -16,7 +16,7 @@ const PropertyDetailsPage = () => {
       // const data = await fetch(`${baseUrl}/api/v1/properties/${id}`, {
       //   cache: "no-store",
       // }).then((res) => res.json());
-      const property = data.properties[id];
+      const property = data.properties[parseInt(id)-1];
       setProperty(property);
     }
 
